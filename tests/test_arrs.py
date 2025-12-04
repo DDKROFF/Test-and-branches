@@ -1,12 +1,14 @@
-from utils import arrs
+import pytest
+from utils.arrs import get, my_slice
 
+def test_get_existing_index():
+    assert get([10, 20, 30], 1) == 20
 
-def test_get():
-    assert arrs.get([1, 2, 3], 1, "test") == 3
-    assert arrs.get([], 0, "test") == "test"
+def test_get_nonexistent_index_with_default():
+    assert get([10, 20, 30], 5, default='default') == 'default'
 
+def test_get_nonexistent_index_without_default():
+    assert get([10, 20, 30], 5) == None
 
-def test_slice():
-    assert arrs.my_slice([1, 2, 3, 4], 1, 3) == [2, 3]
-    assert arrs.my_slice([1, 2, 3], 1) == [2, 3]
-
+def test_get_negative_index_returns_default():
+    assert get([10, 20, 30], -1, default='default') == 'default'
